@@ -1,0 +1,124 @@
+:root {
+  --bg: #14090a;
+  --bg-elev: #1d0b0c;
+  --glow: #3a0f10;
+  --red: #e63a2e;
+  --cream: #f3e6dc;
+  --muted: #caa9a0;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  background: radial-gradient(circle at 70% 25%, var(--glow), #1d0b0c 55%, var(--bg) 100%);
+  background-attachment: fixed;
+  color: var(--cream);
+  font-family: "Inter", system-ui, sans-serif;
+  min-height: 100%;
+}
+
+a { color: var(--red); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 4rem 1.5rem 3rem;
+  gap: 1rem;
+}
+
+.ascii-banner {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: clamp(0.45rem, 1.1vw, 0.72rem);
+  line-height: 1.05;
+  white-space: pre;
+  margin: 0 0 1rem;
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+h1 {
+  font-size: clamp(2.2rem, 6vw, 3.4rem);
+  margin: 0;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.tagline {
+  color: var(--muted);
+  max-width: 42ch;
+  margin: 0;
+}
+
+.cta-row {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+.btn {
+  border: 1px solid rgba(243, 230, 220, 0.25);
+  padding: 0.65rem 1.25rem;
+  border-radius: 999px;
+  font-weight: 600;
+  color: var(--cream);
+  transition: border-color 0.15s, background 0.15s;
+}
+.btn:hover { border-color: var(--red); text-decoration: none; background: rgba(230, 58, 46, 0.08); }
+.btn.primary { background: var(--red); border-color: var(--red); color: #fff; }
+.btn.primary:hover { background: #d13327; }
+
+.install-cmd {
+  margin-top: 1.25rem;
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px dashed rgba(243, 230, 220, 0.25);
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  max-width: 90vw;
+}
+.install-cmd code {
+  display: block;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.78rem;
+  overflow-x: auto;
+  white-space: nowrap;
+  color: var(--cream);
+}
+.install-cmd .hint { font-size: 0.72rem; color: var(--muted); }
+
+main { max-width: 1040px; margin: 0 auto; padding: 1rem 1.5rem 3rem; }
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.1rem;
+  margin: 2rem 0;
+}
+
+.feature {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(243, 230, 220, 0.08);
+  border-radius: 14px;
+  padding: 1.25rem 1.4rem;
+}
+.feature h2 { font-size: 1.05rem; margin: 0 0 0.4rem; color: var(--red); }
+.feature p { margin: 0; color: var(--muted); font-size: 0.92rem; line-height: 1.5; }
+
+.about { margin: 2.5rem 0; }
+.about h2 { font-size: 1.3rem; }
+.about p { color: var(--muted); line-height: 1.6; }
+
+footer {
+  border-top: 1px solid rgba(243, 230, 220, 0.08);
+  padding: 2rem 1.5rem;
+  text-align: center;
+}
+footer nav { display: flex; gap: 1.25rem; justify-content: center; flex-wrap: wrap; margin-bottom: 0.75rem; }
+footer .small { color: var(--muted); font-size: 0.8rem; margin: 0; }
