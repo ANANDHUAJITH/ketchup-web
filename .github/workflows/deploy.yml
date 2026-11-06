@@ -38,7 +38,7 @@ jobs:
       # If you ever map a custom domain (CNAME) to the root, drop --public-url
       # (or set it to "/") since the site would then live at the root instead.
       - name: Build (release)
-        run: trunk build --release --public-url /ketchup/
+        run: trunk build --release --public-url /ketchup-web/
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
