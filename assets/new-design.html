@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#dceaff">
+<meta name="description" content="Ketchup Linux — a fast, slim, Arch-based desktop operating system.">
+<title>Ketchup Linux — Fast. Sleek. Lightweight.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#dceaff;--ink:#101b2d;--muted:#526985;--red:#ed1728;--red2:#c9091b;--glass:rgba(255,255,255,.48);--glass-border:rgba(255,255,255,.82);--card:rgba(255,255,255,.64);--terminal:#101a2a;--terminal-ink:#dce8fa;--shadow:0 24px 60px rgba(34,66,112,.22);--ascii-size:3.5px;color-scheme:light}
+html[data-theme=dark]{--bg:#090d17;--ink:#f3f6ff;--muted:#a5b3c9;--glass:rgba(10,18,32,.55);--glass-border:rgba(255,255,255,.14);--card:rgba(15,25,42,.74);--terminal:#050a12;--terminal-ink:#e5edff;--shadow:0 24px 60px rgba(0,0,0,.4);color-scheme:dark}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:100px}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;transition:background .25s,color .25s}a{color:inherit;text-decoration:none}button{font:inherit}
+.scene{position:relative;isolation:isolate;overflow:hidden;background:linear-gradient(180deg,#dce7f5 0%,#f5f7fa 43%,#dce5f0 72%,#b4c3d5 100%);min-height:850px}
+html[data-theme=dark] .scene{background:linear-gradient(180deg,#07101f 0%,#17243a 45%,#101a2b 100%)}
+.landscape{position:absolute;inset:0;z-index:-1;width:100%;height:100%;pointer-events:none}
+.scene:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(222,237,255,.1),rgba(235,243,255,.02) 58%,rgba(31,62,105,.1));pointer-events:none}
+html[data-theme=dark] .scene:after{background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.2) 55%,rgba(0,0,0,.6))}
+.nav-wrap{padding:15px 24px 0;position:relative;z-index:5}.topnav{max-width:1320px;margin:auto;min-height:64px;padding:9px 16px 9px 20px;border:1px solid var(--glass-border);border-radius:999px;background:var(--glass);backdrop-filter:blur(18px) saturate(145%);display:flex;align-items:center;gap:20px;box-shadow:0 8px 30px rgba(40,75,120,.08)}
+.brand{display:flex;align-items:center;gap:12px;white-space:nowrap}.brand-mark{width:48px;height:48px;display:block;object-fit:contain;flex:none}.brand strong{font-size:18px;font-weight:900;letter-spacing:.03em}.visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.brand small{font-size:12px;color:var(--muted);border-left:1px solid var(--glass-border);padding-left:20px;margin-left:8px;white-space:nowrap}
+.nav-links{display:flex;align-items:center;gap:6px;margin:auto}.nav-links a,.more summary{font-size:13px;font-weight:650;color:var(--muted);padding:12px 13px;border-radius:24px;cursor:pointer;white-space:nowrap}.nav-links a:hover,.more summary:hover{color:var(--ink);background:rgba(255,255,255,.35)}.nav-links a.active{color:var(--red);position:relative}.nav-links a.active:after{content:"";position:absolute;bottom:-10px;left:10px;right:10px;height:2px;background:var(--red)}
+.more{position:relative}.more summary{list-style:none}.more summary::-webkit-details-marker{display:none}.more-menu{position:absolute;top:45px;right:0;min-width:180px;padding:7px;border:1px solid var(--glass-border);border-radius:14px;background:var(--card);backdrop-filter:blur(20px);box-shadow:var(--shadow);display:grid}.more-menu a{padding:10px 12px;border-radius:9px}.more-menu a:hover{background:rgba(255,255,255,.3)}
+.actions{display:flex;gap:9px}.round{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--glass-border);background:rgba(255,255,255,.35);color:var(--ink);cursor:pointer;transition:.2s}.round:hover{transform:translateY(-2px);background:rgba(255,255,255,.7)}.round svg{width:18px;height:18px}
+.hero{max-width:1100px;margin:auto;padding:60px 24px 0;text-align:center;display:flex;align-items:center;flex-direction:column;gap:13px}.eyebrow{display:inline-flex;align-items:center;gap:10px;padding:8px 15px;border-radius:30px;border:1px solid var(--glass-border);background:rgba(255,255,255,.3);font-size:12px;font-weight:600;color:var(--muted);backdrop-filter:blur(10px)}.pulse{width:9px;height:9px;border-radius:50%;background:var(--red);box-shadow:0 0 0 5px rgba(237,23,40,.1)}
+h1{font-size:clamp(64px,9vw,104px);line-height:.98;letter-spacing:-.075em;margin:4px 0 0;font-weight:900;color:var(--ink)}h1 .red{color:var(--red)}.tagline{font-size:clamp(19px,2.3vw,26px);font-weight:500;margin:0;letter-spacing:-.025em}.meta{font-size:14px;color:var(--muted);margin:0}.meta span{padding:0 10px;opacity:.6}
+.ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:13px 0 5px}.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 22px;border-radius:30px;font-size:13px;font-weight:750;border:1px solid var(--glass-border);background:rgba(255,255,255,.45);box-shadow:0 8px 20px rgba(40,70,110,.08);transition:.2s}.btn:hover{transform:translateY(-2px);text-decoration:none}.btn svg{width:18px;height:18px}.btn.primary{background:linear-gradient(135deg,#ff2638,#d50018);border-color:#e80d23;color:#fff;box-shadow:0 10px 22px rgba(237,23,40,.32)}.btn.secondary{color:var(--ink)}
+.fetch-card{width:min(100%,620px);margin:19px auto 0;padding:13px 16px 18px;border:1px solid rgba(160,194,235,.3);border-radius:17px;background:linear-gradient(145deg,rgba(17,30,49,.98),rgba(8,15,27,.98));box-shadow:0 28px 55px rgba(14,34,65,.35);color:var(--terminal-ink);text-align:left;position:relative}
+.windowbar{display:flex;gap:7px;padding:2px 0 12px}.dot{width:9px;height:9px;border-radius:50%;background:#ff4e61}.dot:nth-child(2){background:#ffc62e}.dot:nth-child(3){background:#25ca70}
+.fetch-inner{display:grid;grid-template-columns:minmax(0,1fr) 1fr;gap:18px;align-items:center}.ascii-wrap{min-width:0;max-height:220px;overflow:auto;border-right:1px solid rgba(255,255,255,.12);padding:0 14px 0 0;scrollbar-width:thin;scrollbar-color:#435879 transparent}.ascii-logo{font-family:"DM Mono",monospace;font-size:var(--ascii-size);line-height:1.12;white-space:pre;display:block;width:max-content;max-width:none;color:#f2f6ff}.ascii-logo .redline{color:#ff253c}.ascii-logo .blueline{color:#9db9e6}
+.stats{font-family:"DM Mono",monospace;font-size:12px;display:grid;gap:8px}.stat{display:grid;grid-template-columns:58px 10px 1fr;gap:7px;white-space:nowrap}.stat b{color:#ff4052}.stat i{font-style:normal;color:#ff4052}.stat span{color:#e2eafa}.meters{display:grid;gap:9px;margin-top:6px}.meter{display:grid;grid-template-columns:36px 1fr 32px;gap:8px;align-items:center;font-size:10px;color:#aebdd2}.track{height:6px;border-radius:10px;background:#29384e;overflow:hidden}.fill{height:100%;border-radius:10px;background:linear-gradient(90deg,#f21a31,#ff8d9a)}
+.ascii-controls{display:flex;align-items:center;gap:10px;margin-top:12px;color:#8fa2bd;font-size:10px;font-family:Inter,sans-serif}.ascii-controls input{width:105px;accent-color:#ff2638}.ascii-controls output{min-width:28px}
+.chips{max-width:1100px;margin:45px auto 0;padding:0 24px;display:grid;grid-template-columns:repeat(6,1fr);position:relative;z-index:2}.chip{min-height:125px;text-align:center;padding:18px 10px;border-right:1px solid rgba(55,91,140,.2);color:#17365e}.chip:last-child{border:0}.chip svg{width:27px;height:27px;color:#2584ed;margin-bottom:12px}.chip:first-child svg{color:var(--red)}.chip strong{display:block;font-size:13px;margin-bottom:7px}.chip small{font-size:11px;line-height:1.5;color:#4f6d96}
+main{max-width:1160px;margin:auto;padding:45px 26px 80px}.workflow{display:grid;grid-template-columns:.8fr 1.4fr;gap:60px;align-items:center;margin:30px 0 82px}.copy .rule{width:42px;height:3px;background:var(--red);margin-bottom:20px}.copy h2{font-size:35px;line-height:1.15;letter-spacing:-.05em;margin:0 0 16px}.copy p{font-size:15px;line-height:1.8;color:var(--muted);max-width:390px;margin:0}.desktop{position:relative;min-height:290px;border-radius:17px;padding:10px;background:linear-gradient(145deg,#17253c,#07101f);box-shadow:0 28px 55px rgba(22,45,80,.28);overflow:hidden;border:1px solid rgba(255,255,255,.15)}.desktop .windowbar{padding:5px 5px 10px}.wallpaper{height:240px;border-radius:9px;position:relative;overflow:hidden;background:linear-gradient(180deg,#182b4c,#e08b9d 80%,#f2bdc6)}.wallpaper:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,14,25,.08),rgba(8,14,25,.55));z-index:1;pointer-events:none}.wall-mtn{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.82) brightness(.76)}.taskbar{z-index:3;position:absolute;bottom:0;left:0;right:0;height:34px;background:rgba(8,14,25,.88);display:flex;align-items:center;padding:0 12px;gap:10px;color:#d9e4f5;font:10px "DM Mono",monospace}.taskbar .launcher{padding:5px 8px;border-radius:5px;background:#28374e}.taskbar .clock{margin-left:auto}.terminal-window{z-index:2;position:absolute;right:4%;top:12%;width:44%;height:68%;border:1px solid #43516a;border-radius:9px;background:rgba(5,9,16,.96);box-shadow:0 12px 35px rgba(0,0,0,.35);padding:10px;color:#dce6f5;font:10px "DM Mono",monospace}.terminal-window .windowbar{padding-bottom:14px}.prompt{color:#ff344b}
+.section-kicker{text-align:center;text-transform:uppercase;letter-spacing:.18em;font-size:10px;font-weight:800;color:var(--red);margin:0 0 10px}.section-title{text-align:center;font-size:34px;letter-spacing:-.05em;margin:0 0 35px}
+#features{margin:92px 0}
+.features{display:grid;grid-template-columns:repeat(3,1fr);row-gap:30px;column-gap:18px}.feature{position:relative;padding:25px 24px 24px;border:1px solid var(--glass-border);border-radius:20px;background:var(--card);backdrop-filter:blur(16px);box-shadow:0 12px 30px rgba(39,68,111,.08);min-height:220px;transition:.2s}.feature:hover{transform:translateY(-5px);box-shadow:var(--shadow)}.feature{backdrop-filter:blur(18px)}.feature .number{position:absolute;right:20px;top:18px;font-size:13px;color:var(--muted);opacity:.55;font-weight:800}.feature .icon{width:38px;height:38px;color:var(--red);margin-bottom:12px}.feature h3{font-size:17px;margin:0 0 10px;letter-spacing:-.03em}.feature p{font-size:12px;line-height:1.7;color:var(--muted);margin:0 0 16px}.feature a{font-size:12px;color:var(--red);font-weight:750}
+.more-section{margin:78px 0 20px}.profile{max-width:620px;margin:auto;display:flex;align-items:center;gap:15px;padding:18px 20px;border:1px solid var(--glass-border);background:var(--card);border-radius:16px;transition:.2s}.profile:hover{transform:translateY(-3px);box-shadow:var(--shadow)}.avatar{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:rgba(237,23,40,.12);color:var(--red);font-weight:900}.profile p{margin:4px 0 0;color:var(--muted);font-size:12px}.profile .arrow{margin-left:auto;color:var(--red);font-size:20px}
+footer{padding:30px 25px 35px;border-top:1px solid var(--glass-border);background:rgba(255,255,255,.2);backdrop-filter:blur(10px)}.foot{max-width:1160px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:22px;flex-wrap:wrap}.foot-brand{display:flex;align-items:center;gap:12px}.foot-brand strong{font-weight:900}.foot-brand small{display:block;color:var(--muted);font-size:11px;margin-top:3px}.foot nav{display:flex;gap:24px}.foot nav a{font-size:12px;color:var(--muted);font-weight:650}.social{display:flex;gap:8px}.social a{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--glass);border:1px solid var(--glass-border);font-size:12px;font-weight:800}
+.photo-story{margin:0 0 92px;display:grid;grid-template-columns:1fr 1fr;gap:18px}.photo-card{position:relative;min-height:300px;overflow:hidden;border-radius:20px;border:1px solid var(--glass-border);box-shadow:0 20px 42px rgba(22,45,80,.16);background:#18243a}.photo-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s ease}.photo-card:hover img{transform:scale(1.035)}.photo-card:after{content:"";position:absolute;inset:35% 0 0;background:linear-gradient(180deg,transparent,rgba(6,12,22,.82))}.photo-caption{position:absolute;z-index:1;bottom:22px;left:24px;right:24px;color:white}.photo-caption span{display:block;text-transform:uppercase;letter-spacing:.16em;font-size:10px;font-weight:800;color:#ff8590;margin-bottom:8px}.photo-caption h3{margin:0;font-size:21px;letter-spacing:-.04em}.photo-caption p{margin:7px 0 0;font-size:12px;line-height:1.55;color:rgba(255,255,255,.8);max-width:380px}
+
+/* Wallpapers — glassmorphic showcase grid */
+.wallpapers{margin:0 0 92px}
+.wall-grid{display:grid;grid-template-columns:repeat(4,1fr);row-gap:26px;column-gap:16px}
+.wall-card{position:relative;margin:0;min-height:230px;border-radius:18px;overflow:hidden;isolation:isolate;border:1px solid rgba(255,255,255,.45);box-shadow:0 18px 38px rgba(22,45,80,.18);transition:transform .3s ease,box-shadow .3s ease}
+.wall-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.wall-card:hover{transform:translateY(-6px)}.wall-card:hover img{transform:scale(1.06)}
+.wall-glass{position:absolute;left:10px;right:10px;bottom:10px;z-index:1;padding:10px 14px;border-radius:13px;background:rgba(255,255,255,.16);backdrop-filter:blur(16px) saturate(160%);-webkit-backdrop-filter:blur(16px) saturate(160%);border:1px solid rgba(255,255,255,.4);box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 8px 20px rgba(0,0,0,.18);color:#fff}
+.wall-glass strong{display:block;font-size:13px;letter-spacing:-.02em}
+.wall-glass span{display:block;font-size:10px;color:rgba(255,255,255,.78);margin-top:2px}
+@media(max-width:900px){.wall-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.wall-grid{grid-template-columns:1fr;row-gap:16px}.wallpapers{margin-bottom:60px}}
+@media(max-width:900px){.brand small{display:none}.topnav{gap:8px}.nav-links a,.more summary{padding:10px 8px;font-size:12px}.chips{grid-template-columns:repeat(3,1fr)}.chip:nth-child(3){border-right:0}.chip:nth-child(-n+3){border-bottom:1px solid rgba(55,91,140,.2)}.workflow{grid-template-columns:1fr;gap:28px}.copy p{max-width:650px}.photo-card{min-height:250px}}
+@media(max-width:640px){.nav-wrap{padding:10px 10px 0}.topnav{padding:8px 10px}.brand{gap:7px}.brand strong{font-size:14px}.brand-mark{width:42px;height:42px}.nav-links{display:none}.actions{margin-left:auto}.round{width:34px;height:34px}.hero{padding:48px 17px 0}.hero h1{font-size:clamp(58px,17vw,84px)}.tagline{font-size:18px}.meta{font-size:11px}.fetch-card{padding:12px}.fetch-inner{grid-template-columns:1fr}.ascii-wrap{border-right:0;border-bottom:1px solid rgba(255,255,255,.12);padding:0 0 10px;max-height:130px}.ascii-logo{font-size:var(--ascii-size)}.stats{grid-template-columns:1fr 1fr;font-size:10px}.stat{grid-template-columns:47px 6px 1fr;gap:3px}.meters{grid-column:1/-1}.chips{padding:0 14px;margin-top:25px;grid-template-columns:repeat(2,1fr)}.chip{min-height:110px;border-bottom:1px solid rgba(55,91,140,.2)}.chip:nth-child(2n){border-right:0}.chip:nth-child(3){border-right:1px solid rgba(55,91,140,.2)}.chip:nth-last-child(-n+2){border-bottom:0}.scene{min-height:0;padding-bottom:30px}main{padding:30px 17px 55px}.workflow{margin:25px 0 60px}.photo-story{grid-template-columns:1fr;gap:13px;margin-bottom:60px}.photo-card{min-height:235px}.copy h2{font-size:30px}.desktop{min-height:230px}.wallpaper{height:185px}.features{grid-template-columns:1fr}.feature{min-height:0}.section-title{font-size:28px}.foot{justify-content:center;text-align:center}.foot-brand{width:100%;justify-content:center}.foot nav{gap:16px}.ascii-controls{flex-wrap:wrap}}
+
+/* Polished atmospheric effects */
+.scene{background-image:radial-gradient(ellipse at 50% 18%,rgba(255,255,255,.78),transparent 43%),radial-gradient(circle at 12% 33%,rgba(237,23,40,.08),transparent 22%),linear-gradient(180deg,#dce7f5 0%,#f5f7fa 43%,#dce5f0 72%,#b4c3d5 100%)}
+.scene:before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.2;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.16'/%3E%3C/svg%3E");mix-blend-mode:multiply}
+.landscape{opacity:.78;filter:saturate(.78)}
+.hero{position:relative;z-index:1}.hero h1{text-shadow:0 10px 35px rgba(29,48,75,.09)}
+.eyebrow{box-shadow:0 12px 35px rgba(37,68,112,.08);animation:rise-in .7s both}.pulse{animation:pulse-ring 2.4s infinite}
+.fetch-card{transition:transform .35s,box-shadow .35s}.fetch-card:hover{transform:translateY(-4px);box-shadow:0 32px 70px rgba(14,34,65,.42)}
+.btn.primary{position:relative;overflow:hidden}.btn.primary:after{content:"";position:absolute;top:-60%;left:-35%;width:30%;height:220%;background:rgba(255,255,255,.26);transform:rotate(25deg);transition:left .6s}.btn.primary:hover:after{left:120%}
+.photo-card{isolation:isolate}.photo-card img{transform:scale(1.015)}.photo-card:before{content:"";position:absolute;z-index:1;inset:12px;border:1px solid rgba(255,255,255,.22);border-radius:13px;pointer-events:none}.photo-card:hover img{transform:scale(1.055)}
+.feature{transition:transform .28s ease,box-shadow .28s ease,border-color .28s ease}.feature:hover{border-color:rgba(237,23,40,.22)}.feature .icon{transition:transform .3s ease}.feature:hover .icon{transform:translateY(-3px) rotate(-4deg)}
+.chip{transition:transform .25s ease}.chip:hover{transform:translateY(-5px)}
+
+/* True glassmorphism: frosted translucency + inner highlight edge, on every glass surface */
+.feature,.chip,.fetch-card,.profile,.more-menu,.topnav,.eyebrow{box-shadow:inset 0 1px 0 rgba(255,255,255,.55),0 12px 30px rgba(39,68,111,.1)}
+.feature:hover{box-shadow:inset 0 1px 0 rgba(255,255,255,.6),var(--shadow)}
+html[data-theme=dark] .feature,html[data-theme=dark] .chip,html[data-theme=dark] .fetch-card,html[data-theme=dark] .profile,html[data-theme=dark] .more-menu,html[data-theme=dark] .topnav,html[data-theme=dark] .eyebrow{box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 12px 30px rgba(0,0,0,.3)}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}.reveal.is-visible{opacity:1;transform:none}
+@keyframes rise-in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes pulse-ring{0%,100%{box-shadow:0 0 0 5px rgba(237,23,40,.10)}50%{box-shadow:0 0 0 9px rgba(237,23,40,.02)}}
+html[data-theme=dark] .scene{background-image:radial-gradient(ellipse at 50% 15%,rgba(46,69,103,.5),transparent 45%),radial-gradient(circle at 14% 34%,rgba(237,23,40,.12),transparent 24%),linear-gradient(180deg,#07101f 0%,#17243a 45%,#101a2b 100%)}
+html[data-theme=dark] .scene:before{opacity:.08;mix-blend-mode:screen}
+@media(prefers-reduced-motion:reduce){.pulse,.eyebrow{animation:none}.reveal{opacity:1;transform:none;transition:none}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+
+/* High-contrast benefit tiles for the key distro qualities */
+.chips{gap:12px;margin-top:36px}
+.chip{min-height:154px;padding:20px 12px;border:1px solid rgba(255,255,255,.95)!important;border-radius:17px;background:rgba(255,255,255,.82);box-shadow:0 10px 28px rgba(35,62,96,.13);color:#14243a;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:transform .22s ease,box-shadow .22s ease,background .22s ease}
+.chip:hover{transform:translateY(-6px);background:#fff;box-shadow:0 18px 36px rgba(35,62,96,.19)}
+.chip svg{width:42px;height:42px;padding:9px;border-radius:13px;background:rgba(37,132,237,.11);color:#176bc4;margin:0 0 11px}
+.chip:first-child svg{background:rgba(237,23,40,.11);color:#d9162a}
+.chip strong{font-size:15px;line-height:1.25;margin-bottom:6px;color:#122138}
+.chip small{font-size:12px;line-height:1.5;color:#40536d}
+html[data-theme=dark] .chip{background:rgba(19,31,49,.93);border-color:rgba(255,255,255,.18)!important;color:#f5f7fb;box-shadow:0 12px 30px rgba(0,0,0,.22)}
+html[data-theme=dark] .chip strong{color:#f5f7fb}html[data-theme=dark] .chip small{color:#bdc9da}
+@media(max-width:640px){.chips{gap:10px}.chip{min-height:142px;padding:16px 10px}.chip strong{font-size:14px}.chip small{font-size:11px}}
+
+
+/* Hero wallpaper + clearer, more transparent glass surfaces */
+.scene{
+  min-height:900px;
+  background:#07101e;
+  isolation:isolate;
+}
+.hero-backdrop{
+  position:absolute;inset:0;z-index:-2;display:block;overflow:hidden;
+}
+.hero-backdrop img{
+  display:block;width:100%;height:100%;object-fit:cover;object-position:center 43%;
+  position:absolute;inset:0;
+}
+.hero-backdrop .hero-light{opacity:1}
+.hero-backdrop .hero-dark{opacity:0}
+html[data-theme=dark] .hero-backdrop .hero-light{opacity:0}
+html[data-theme=dark] .hero-backdrop .hero-dark{opacity:1}
+.scene:after{
+  z-index:-1;
+  background:linear-gradient(180deg,rgba(4,9,18,.10) 0%,rgba(4,9,18,.04) 38%,rgba(4,9,18,.48) 100%);
+}
+.scene:before{z-index:-1;opacity:.08;mix-blend-mode:soft-light}
+html[data-theme=light] .scene:after{
+  background:linear-gradient(180deg,rgba(8,22,43,.08) 0%,rgba(8,22,43,.03) 40%,rgba(8,22,43,.36) 100%);
+}
+html[data-theme=dark] .scene:after{
+  background:linear-gradient(180deg,rgba(0,0,0,.16) 0%,rgba(0,0,0,.08) 38%,rgba(0,0,0,.62) 100%);
+}
+.hero h1, .tagline, .meta{color:#fff;text-shadow:0 2px 22px rgba(0,0,0,.38)}
+.hero h1 .red{color:#ff4658}
+.meta{color:rgba(255,255,255,.82)}
+.eyebrow{
+  color:#fff;background:rgba(12,22,39,.30);
+  border-color:rgba(255,255,255,.32);
+  backdrop-filter:blur(18px) saturate(155%);
+  -webkit-backdrop-filter:blur(18px) saturate(155%);
+}
+.fetch-card{
+  background:linear-gradient(135deg,rgba(9,17,31,.53),rgba(8,15,28,.34));
+  border:1px solid rgba(255,255,255,.30);
+  backdrop-filter:blur(22px) saturate(155%);
+  -webkit-backdrop-filter:blur(22px) saturate(155%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.24),0 24px 65px rgba(0,0,0,.24);
+}
+.chips{margin-top:38px}
+.chip{
+  background:rgba(13,25,43,.30)!important;
+  border:1px solid rgba(255,255,255,.36)!important;
+  color:#fff!important;
+  backdrop-filter:blur(20px) saturate(145%);
+  -webkit-backdrop-filter:blur(20px) saturate(145%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.24),0 12px 32px rgba(0,0,0,.16);
+}
+.chip strong{color:#fff!important}
+.chip small{color:rgba(255,255,255,.82)!important}
+.chip svg{background:rgba(255,255,255,.14)!important;color:#fff!important}
+.chip:first-child svg{background:rgba(237,23,40,.28)!important;color:#fff!important}
+html[data-theme=dark] .chip,html[data-theme=light] .chip{
+  background:rgba(13,25,43,.30)!important;
+  border-color:rgba(255,255,255,.36)!important;
+}
+.btn.secondary{
+  color:#fff;background:rgba(10,20,36,.32);
+  border-color:rgba(255,255,255,.38);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+}
+html[data-theme=dark] .hero h1,html[data-theme=dark] .tagline,html[data-theme=dark] .meta{color:#fff}
+@media(max-width:640px){
+ .scene{min-height:0}
+ .hero-backdrop img{object-position:53% center}
+ .chips{margin-top:28px}
+}
+@media(prefers-reduced-transparency:reduce){
+ .fetch-card,.chip,.eyebrow,.btn.secondary{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(8,16,29,.88)}
+}
+
+</style>
+</head>
+<body>
+<div class="scene" id="home">
+<div class="hero-backdrop" aria-hidden="true">
+  <img class="hero-light" src="assets/images/hero-azure-dawn.png" alt="">
+  <img class="hero-dark" src="assets/images/hero-crimson-night.png" alt="">
+</div>
+<div class="nav-wrap"><nav class="topnav" aria-label="Main navigation">
+<a class="brand" href="#home" aria-label="Ketchup home"><img class="brand-mark" src="assets/ketchup-logo-light-transparent.svg" alt="Ketchup Linux"><strong class="visually-hidden">KETCHUP</strong><small>Fast. Sleek. Lightweight Linux Distro</small></a>
+<div class="nav-links"><a class="active" href="#home">⌂ &nbsp;Home</a><a href="#downloads">⬇ &nbsp;Downloads</a><a href="#wallpapers">◈ &nbsp;Wallpapers</a><a href="https://github.com/ANANDHUAJITH/ketchup">〈/〉 &nbsp;Repo</a><a href="#about">● &nbsp;About</a><details class="more"><summary>More⌄</summary><div class="more-menu"><a href="https://github.com/ANANDHUAJITH/ketchup/discussions">Discussions</a><a href="https://github.com/ANANDHUAJITH/ketchup/issues">Issues</a><a href="https://github.com/ANANDHUAJITH/ketchup">Documentation</a><a href="https://github.com/ANANDHUAJITH">More by me</a></div></details></div>
+<div class="actions"><button class="round" id="themeToggle" aria-label="Switch to dark theme" title="Toggle theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.5 15.5A8.5 8.5 0 0 1 8.5 3.5 8.5 8.5 0 1 0 20.5 15.5Z"/></svg></button><a class="round" href="https://github.com/ANANDHUAJITH/ketchup" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .9a11.1 11.1 0 0 0-3.51 21.63c.55.1.76-.24.76-.53v-2.08c-3.1.67-3.75-1.31-3.75-1.31-.5-1.29-1.24-1.63-1.24-1.63-1.01-.69.08-.68.08-.68 1.12.08 1.71 1.15 1.71 1.15 1 1.7 2.62 1.21 3.26.93.1-.72.39-1.21.71-1.49-2.47-.28-5.07-1.24-5.07-5.5 0-1.22.44-2.21 1.15-2.99-.12-.28-.5-1.42.11-2.95 0 0 .94-.3 3.05 1.14a10.6 10.6 0 0 1 5.55 0c2.11-1.44 3.05-1.14 3.05-1.14.61 1.53.23 2.67.11 2.95.72.78 1.15 1.77 1.15 2.99 0 4.27-2.6 5.22-5.08 5.49.4.35.76 1.02.76 2.06V22c0 .29.2.64.77.53A11.1 11.1 0 0 0 12 .9Z"/></svg></a></div>
+</nav></div>
+<header class="hero">
+<div class="eyebrow"><span class="pulse"></span>Arch-based. Lean by design. Ready to make yours.</div>
+<h1><span>Ketc</span><span class="red">hup</span></h1>
+<p class="tagline">A focused Linux desktop, tuned for everyday speed.</p>
+<p class="meta">KDE Plasma <span>•</span> Linux-zen kernel <span>•</span> Built for performance</p>
+<div class="ctas"><a class="btn primary" href="#downloads"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 3v12m-5-5 5 5 5-5M4 17v4h16v-4"/></svg>Download the ISO</a><a class="btn secondary" href="https://github.com/ANANDHUAJITH/ketchup"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .9a11.1 11.1 0 0 0-3.51 21.63c.55.1.76-.24.76-.53v-2.08c-3.1.67-3.75-1.31-3.75-1.31-.5-1.29-1.24-1.63-1.24-1.63-1.01-.69.08-.68.08-.68 1.12.08 1.71 1.15 1.71 1.15 1 1.7 2.62 1.21 3.26.93.1-.72.39-1.21.71-1.49-2.47-.28-5.07-1.24-5.07-5.5 0-1.22.44-2.21 1.15-2.99-.12-.28-.5-1.42.11-2.95 0 0 .94-.3 3.05 1.14a10.6 10.6 0 0 1 5.55 0c2.11-1.44 3.05-1.14 3.05-1.14.61 1.53.23 2.67.11 2.95.72.78 1.15 1.77 1.15 2.99 0 4.27-2.6 5.22-5.08 5.49.4.35.76 1.02.76 2.06V22c0 .29.2.64.77.53A11.1 11.1 0 0 0 12 .9Z"/></svg>Source on GitHub</a></div>
+<section class="fetch-card" aria-label="Ketchup system information preview"><div class="windowbar"><i class="dot"></i><i class="dot"></i><i class="dot"></i></div><div class="fetch-inner"><div class="ascii-wrap"><pre class="ascii-logo" id="asciiLogo">                                                                     j@,                                                                    
+                                                                    @@@@,                                                                   
+                                                                   @@@@@@,                                                                  
+                                                                  @@@@@@@@\                                                                 
+                                                                ,@@@@@@@@@@L                                                                
+                                                               ,@@@@@@@@@@@@a                                                               
+                                                              ,@@@@@@@@@@@@@@g                                                              
+                                                             /@@@@@@@@@@@@@@@@@                                                             
+                                                            J@@@@@@@@@@@@B=4@@@@                                                            
+                                                           @@@@@@@@@@@@W     T@@@,                                                          
+                                                         ,@@@@@@@@@@@@@   @l  0@@@L                                                         
+                                                        _@@@@@@@@@@@@@W  !@,,  @@@@a                                                        
+                                                       /@@@@@@@@@@@@@@   0==&quot;   B@@@g                                                       
+                                                      /@@@@@@@@@@@@@D&quot;     ..._    @@@                                                      
+                                                     j@@@@@@@@@@@@@  __@@@@@@@@@{  9@@@,                                                    
+                                                    @@@@@@@@@@@@@@g  B&gt;            &#x27;@@@@_                                                   
+                                                  ,@@@@@@@@@@@@@@@&quot;     ,og@@g__-_    %@@L                                                  
+                                                 _@@@@@@@@@@@@@@        |@@@@@@@@@_&lt;h  @@@g                                                 
+                                                /@@@@@@@@@@@@@@@:       |@@@@@@@@@@]@  [@@@@                                                
+                                               g@@@@@@@@@@@@@@P        _g&quot; @@@@@@@@@|, &#x27;@@@@@                                               
+                                              @@@@@@@@@@@@@@B      _o@@    @@@@@@@@@ B  @@@@@@,                                             
+                                             @@@@@@@BP&gt;&quot;      __g@@@@&#x27;     0@@@@@@@@|@  [@@@@@@,                                            
+                                                      ___gg@@@@@@@@F       [@@@@@@@@@|,  @@@@@@@L                                           
+                                    ____~~gggggg@@@@@@@@@@@@@@@@@F          @@@@@@@@@ @  @@@@@@@@a                                          
+                               _g@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@F            @@@@@@@@@;@  [@@@@@@@@g                                         
+                            _@@@@@@@@@@@@@@@@@@@@@@@B&quot;_g@@@@@F              @@@@@@@@@@[,  @@@@@@@@@@                                        
+                         ,g@@P&gt;&quot;&quot;&quot;&quot;=B@@@@@@@@@@@B&quot;  _@@@@@@P        .       [@@@@@@@@@&#x27;g  @@@@@@@@@@@                                       
+                        f&quot;             &#x27;8@@@@P&#x27;   g@@@@@@@          |       !@@@@@@@@@,@  [@@@@@@@@@@@,                                     
+                                     __   &quot;    _@@@@@@@@P                    @@@@@@@@@B@,  @@@@@@@@@@@@_                                    
+                                    g@@@_     @@@@@@@@@F           |         @@@@@@@@@@&#x27;g  @@@@@@@@@@@@@L                                   
+                                   @@@@@@@,     &quot;B@@@@F            @         0@@@@@@@@@,@  !@@@@@@@@@@@@@g                                  
+                                 ,@@@@@@@@@g        &#x27;&quot;            .g         |@@@@@@@@@h@,  @@@@@@@@@@@@@@@                                 
+                                /@@@@@@@@@@@@g_            _~g_,  [|          @@@@@@@@@@{B  [@@@@@@@@@@@@@@@                                
+                               j@@@@@@@@@@@@@@@@g_______o@@@@@@   @                 &#x27;&lt;8@ @   @@@@@@@@@@@@@@@@,                              
+                              @@@@@@@@@@@@@@@@@@@@@@@BB==&gt;&quot;&quot;&quot;&quot;&quot;   @            __~__         @@@@@@@@@@@@@@@@@,                             
+                             @@@@@@@@@@@@@@@@D&gt;&quot;                 |P      __o&gt;&quot;     &quot;4@@g_   -B@@@@@@@@@@@@@@@@@L                            
+                           ,@@@@@@@@@@@B&gt;                         _.-~&#x27;                 %@a_     &#x27;&lt;Q@@@@@@@@@@@@a                           
+                          _@@@@@@@D&quot;                           ,@                         &#x27;&quot;0@@g__  &#x27;@@@@@@@@@@@@g                          
+                         /@@@@P&quot;                          __o@B&quot;                                &#x27;@@,    &#x27;&quot;&lt;4B@@@@@@                         
+                        g@@&quot;                         __mP&quot;                                        &quot;@a           &quot;0@@,                       
+                       @&quot;                        .~&quot;                                                &lt;B_            `%,                      
+                      ,__,      _~~~s    _________    _________,      _______    ,__      __    ,_,     __    ________                      
+                      [@@g   _o@@@&quot;      @@@BBBBBB    BBBB@@BBB!    g@@@@@@@@    [@@      @@    [@g     @@    @@@BBBB@@g                    
+                      [@@g _@@@P         @@]             |@@        @@           [@@______@@    [@g     @@    @@]     @@                    
+                      [@@W%@@@_          @@@@@@@B!       |@@        @@           [@@@@@@@@@@    [@g     @@    @@@@@@@@@F                    
+                      [@@g  &#x27;0@@@_       @@]             |@@        @@_______    [@@      @@    [@B_____@@    @@]                           
+                      [@@g     &quot;@@@g_    \@@@@@@@@       |@@        &#x27;@@@@@@@@    [@@      @@     8@@@@@@@&quot;    @@]                           </pre></div><div class="stats"><div class="stat"><b>OS</b><i>:</i><span>Ketchup Linux x86_64</span></div><div class="stat"><b>Kernel</b><i>:</i><span>Linux-zen</span></div><div class="stat"><b>DE</b><i>:</i><span>KDE Plasma</span></div><div class="stat"><b>Shell</b><i>:</i><span>zsh + starship</span></div><div class="stat"><b>Pkg</b><i>:</i><span>pacman</span></div><div class="stat"><b>Size</b><i>:</i><span>~3.4 GB</span></div><div class="meters"><div class="meter"><span>CPU</span><div class="track"><div class="fill" style="width:34%"></div></div><span>34%</span></div><div class="meter"><span>RAM</span><div class="track"><div class="fill" style="width:31%"></div></div><span>31%</span></div></div></div></div><label class="ascii-controls" for="asciiSize">ASCII logo size <input id="asciiSize" type="range" min="2" max="9" step=".5" value="3.5"><output id="asciiSizeValue">3.5px</output><span>— adjust the logo scale</span></label></section>
+<div class="ctas" id="downloads"><a class="btn primary" href="https://github.com/ANANDHUAJITH/ketchup/releases/latest"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 3v12m-5-5 5 5 5-5M4 17v4h16v-4"/></svg>Download the ISO</a><a class="btn secondary" href="https://github.com/ANANDHUAJITH/ketchup"><span style="font-size:17px">◉</span>Source on GitHub</a></div>
+</header>
+<div class="chips">
+<div class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m13 2-9 12h7l-1 8 10-13h-7z"/></svg><strong>Blazing Fast</strong><small>Optimized for speed<br>right out of the box.</small></div>
+<div class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-8-4.5-8-11a4 4 0 0 1 8-1 4 4 0 0 1 8 1c0 6.5-8 11-8 11Z"/></svg><strong>Ultra Lightweight</strong><small>Minimal footprint,<br>maximum performance.</small></div>
+<div class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 2 10 19H2z"/><path d="m12 9 3 7h-6z" fill="currentColor"/></svg><strong>Arch Based</strong><small>Rolling release,<br>latest software.</small></div>
+<div class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 2 9 5v10l-9 5-9-5V7z"/><path d="m3 7 9 5 9-5M12 12v10"/></svg><strong>Modern Desktop</strong><small>KDE Plasma, polished<br>and beautiful.</small></div>
+<div class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m14 7 3-3 3 3-3 3M4 20l10-10M4 4l6 6m-2-8 4 4-3 3-4-4z"/></svg><strong>Powerful Tools</strong><small>For developers and<br>creators.</small></div>
+<div class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"/><path d="m9 12 2 2 4-4"/></svg><strong>Secure & Stable</strong><small>Built on a proven<br>open-source base.</small></div>
+</div>
+</div>
+<main>
+<section class="workflow" id="about"><div class="copy"><div class="rule"></div><h2>Built for the way<br>you work</h2><p>Ketchup combines the stability of a modern Linux base with the flexibility of Arch. Minimal by default, customizable by design — starts from the CachyOS Live ISO profile and rebuilds the boot path, branding, installer, and a chunk of the default tool set on top of it.</p></div>
+<div class="desktop"><div class="windowbar"><i class="dot"></i><i class="dot"></i><i class="dot"></i></div><div class="wallpaper"><img class="wall-mtn" src="assets/images/workspace.jpeg" alt="A calm, modern workspace with a laptop and natural light"><div class="terminal-window"><div class="windowbar"><i class="dot"></i><i class="dot"></i><i class="dot"></i></div><span class="prompt">ketchup@ketchup</span> ~ $ neofetch<br><br><span class="prompt">ketchup@ketchup</span> ~ $ <span style="color:#f2f6ff">_</span></div><div class="taskbar"><span class="launcher">▦ Applications</span><span>⌕ Search...</span><span>▣</span><span>◧</span><span class="clock">22:14</span></div></div></div></section>
+<section class="photo-story" aria-label="Ketchup Linux workspaces">
+<article class="photo-card"><img src="assets/images/workspace.jpeg" alt="Minimal workspace with a laptop and soft daylight" loading="lazy"><div class="photo-caption"><span>Made for focus</span><h3>Your workspace, without the noise.</h3><p>A clean desktop foundation that leaves room for your own workflow.</p></div></article>
+<article class="photo-card"><img src="assets/images/desk.jpg" alt="Thoughtfully arranged modern computer workspace" loading="lazy"><div class="photo-caption"><span>Built around you</span><h3>Power where you need it.</h3><p>Useful tools and a flexible Arch-based system, ready to make your own.</p></div></article>
+</section>
+<section class="wallpapers" id="wallpapers"><p class="section-kicker">Wallpapers</p><h2 class="section-title">Four moods, one summit</h2><div class="wall-grid">
+<figure class="wall-card"><img src="assets/images/wallpaper-crimson-night.jpg" alt="Crimson Night wallpaper — a cloaked figure on a peak under a blood-red moon" loading="lazy"><figcaption class="wall-glass"><strong>Crimson Night</strong><span>4K · dark mode default</span></figcaption></figure>
+<figure class="wall-card"><img src="assets/images/wallpaper-azure-night.jpg" alt="Azure Night wallpaper — a cloaked figure on a peak under a glowing blue moon" loading="lazy"><figcaption class="wall-glass"><strong>Azure Night</strong><span>4K · alternate dark</span></figcaption></figure>
+<figure class="wall-card"><img src="assets/images/wallpaper-azure-dawn.jpg" alt="Azure Dawn wallpaper — the same peak under a bright daylight sky" loading="lazy"><figcaption class="wall-glass"><strong>Azure Dawn</strong><span>4K · light mode default</span></figcaption></figure>
+<figure class="wall-card"><img src="assets/images/wallpaper-crimson-dawn.jpg" alt="Crimson Dawn wallpaper — the same peak under a warm golden daylight sky" loading="lazy"><figcaption class="wall-glass"><strong>Crimson Dawn</strong><span>4K · alternate light</span></figcaption></figure>
+</div></section>
+<section id="features"><p class="section-kicker">Features</p><h2 class="section-title">Everything tuned, nothing bloated</h2><div class="features">
+<article class="feature"><span class="number">01</span><svg class="icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="3"><path d="M4 29a16 16 0 1 1 32 0"/><path d="m20 22 10-10"/><circle cx="20" cy="22" r="3" fill="currentColor"/></svg><h3>Limine, everywhere</h3><p>A single bootloader across BIOS, UEFI and hybrid USB, with hash-pinned kernel/initramfs and automatic GRUB fallback when a disk's /boot can't be read by Limine.</p><a href="https://github.com/ANANDHUAJITH/ketchup">Learn more →</a></article>
+<article class="feature"><span class="number">02</span><svg class="icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 3 35 10v11c0 9-15 16-15 16S5 30 5 21V10Z"/><path d="m12 20 5 5 11-12"/></svg><h3>Rust-first userland</h3><p>alacritty, eza, bat, fd, ripgrep, sd, dust, procs, bottom, zoxide, starship, yazi, helix, zellij and more ship by default, alongside KDE Plasma and linux-zen.</p><a href="https://github.com/ANANDHUAJITH/ketchup">Explore tools →</a></article>
+<article class="feature"><span class="number">03</span><svg class="icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m20 3 16 9v17l-16 8L4 29V12Z"/><path d="m4 12 16 9 16-9M20 21v16"/></svg><h3>Ketchup Lens</h3><p>Trace a real running program, or step through a toy CPU/MMU/cache/RAM/disk one instruction at a time — a teaching tool built into the OS itself.</p><a href="https://github.com/ANANDHUAJITH/ketchup">Try it now →</a></article>
+<article class="feature"><span class="number">04</span><svg class="icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 3 35 10v11c0 9-15 16-15 16S5 30 5 21V10Z"/><path d="M13 20h14M20 13v14"/></svg><h3>Tuned, not just themed</h3><p>zram with zstd, BBR, ananicy-cpp, scx_lavd, systemd-oomd and weekly fstrim are on by default; the live initramfs itself uses zstd so the boot-to-splash gap stays short.</p><a href="https://github.com/ANANDHUAJITH/ketchup">See the tuning →</a></article>
+<article class="feature"><span class="number">05</span><svg class="icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 4 35 12v16l-15 8L5 28V12Z"/><path d="m13 20 5 5 9-11"/></svg><h3>Built-in self-checks</h3><p>ketchup-audit, ketchup-doctor and ketchup-irqfix turn "something feels off" into a concrete diagnosis instead of a forum post.</p><a href="https://github.com/ANANDHUAJITH/ketchup">Run a check →</a></article>
+<article class="feature"><span class="number">06</span><svg class="icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="5" y="7" width="30" height="25" rx="3"/><path d="M5 14h30M12 25l5-5 5 5"/></svg><h3>Offline-capable installer</h3><p>Calamares installs straight from the live image — no network required — onto btrfs + zstd + subvolumes by default.</p><a href="https://github.com/ANANDHUAJITH/ketchup">See install docs →</a></article>
+</div></section>
+<section class="more-section"><p class="section-kicker">More</p><h2 class="section-title">More by me</h2><a class="profile" href="https://github.com/ANANDHUAJITH"><span class="avatar">A</span><span><strong>@ANANDHUAJITH on GitHub</strong><p>Other projects, experiments and contributions.</p></span><span class="arrow">→</span></a></section>
+</main>
+<footer><div class="foot"><div class="foot-brand"><img class="brand-mark" src="assets/ketchup-logo-light-transparent.svg" alt=""><span class="visually-hidden"><strong>KETCHUP</strong><small>A fast, flexible Arch-based desktop OS.</small></span></div><nav><a href="#home">Home</a><a href="#downloads">Downloads</a><a href="https://github.com/ANANDHUAJITH/ketchup">Repo</a><a href="#about">About</a></nav><div class="social"><a href="https://github.com/ANANDHUAJITH/ketchup" aria-label="GitHub">GH</a><a href="https://github.com/ANANDHUAJITH" aria-label="Creator">A</a><a href="mailto:">✉</a></div></div></footer>
+<script>
+const root=document.documentElement,themeButton=document.getElementById('themeToggle');
+document.querySelectorAll('main .workflow, main .photo-card, main #features, main .more-section, .chip').forEach(el=>el.classList.add('reveal'));
+if('IntersectionObserver' in window){const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');observer.unobserve(entry.target)}}),{threshold:.12});document.querySelectorAll('.reveal').forEach(el=>observer.observe(el))}else{document.querySelectorAll('.reveal').forEach(el=>el.classList.add('is-visible'))}
+themeButton.addEventListener('click',()=>{const dark=root.dataset.theme!=='dark';root.dataset.theme=dark?'dark':'light';themeButton.setAttribute('aria-label',dark?'Switch to light theme':'Switch to dark theme');themeButton.innerHTML=dark?'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg>':'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.5 15.5A8.5 8.5 0 0 1 8.5 3.5 8.5 8.5 0 1 0 20.5 15.5Z"/></svg>';});
+const size=document.getElementById('asciiSize'),sizeValue=document.getElementById('asciiSizeValue');
+size.addEventListener('input',()=>{root.style.setProperty('--ascii-size',size.value+'px');sizeValue.value=size.value+'px';sizeValue.textContent=size.value+'px';});
+</script>
+</body></html>
