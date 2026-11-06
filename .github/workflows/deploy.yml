@@ -33,12 +33,16 @@ jobs:
         with:
           version: "latest"
 
-      # Repo name is "ketchup", so Pages serves this at <user>.github.io/ketchup/ -
-      # --public-url makes the wasm/js/css links absolute to that subpath.
-      # If you ever map a custom domain (CNAME) to the root, drop --public-url
-      # (or set it to "/") since the site would then live at the root instead.
+      # The repository is "ketchup-web", so Pages serves this at
+      # <user>.github.io/ketchup-web/; --public-url aligns Trunk's bundle links.
+      # If you map a custom domain to the root, drop --public-url or set it to "/".
       - name: Build (release)
         run: trunk build --release --public-url /ketchup-web/
+
+      # Images referenced by HTML embedded in the WASM bundle are invisible to
+      # Trunk's asset scanner, so copy the source assets into the Pages artifact.
+      - name: Copy static assets
+        run: cp -R assets dist/assets
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
